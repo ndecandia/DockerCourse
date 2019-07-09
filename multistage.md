@@ -1,4 +1,4 @@
-# Multi-Stage Builds
+# Create Images using Dockerfiles (3/3) | Multi-Stage
 
 By the end of this exercise, you should be able to:
 
