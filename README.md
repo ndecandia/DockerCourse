@@ -2,6 +2,7 @@
 
 #### Exercises
 
+ - [Using RunC to start a Container](/runc.md) 
  - [Run & Inspect Containers](/run_inspect_container.md) 
  - [Interactive Containers](linux/exercises/interactive-containers.md)
  - [Detached Containers and Logging](linux/exercises/detached-containers-and-logging.md)
