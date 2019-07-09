@@ -28,3 +28,67 @@ containerd.io.x86_64 0:1.2.4-3.1.el7 libseccomp.x86_64 0:2.3.1-2.el7
 Complete!
 
 ```
+
+3.Create a simple root filesystem for the container to use:
+
+```bash
+# mkdir -p /root/container/rootfs/
+# cd $_
+# tar xf /labfiles/docker/alpine.tar
+# ls
+bin dev etc home lib linuxrc media mnt proc root run sbin srv sys tmp usr var
+
+```
+
+4.Create a runC specification file and examine it:
+
+```bash
+# cd ..
+# runc spec
+# less config.json
+```
+
+When done, press 'q' to quit
+
+5.Launch a shell running in the container and explore the isolating effect of
+namespaces:
+
+```bash
+# runc run c1
+/ # pwd
+/
+/ # ls
+bin etc lib media proc run srv tmp var
+dev home linuxrc mnt root sbin sys usr
+/ # ls /dev/
+console fd mqueue ptmx random stderr stdout urandom
+core full null pts shm stdin tty zero
+/ # ps -ef
+PID USER TIME COMMAND
+1 root 0:00 sh
+7 root 0:00 ps -ef
+/ # hostname
+/ # ip link show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN
+link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+/ # exit
+```
+
+Exiting the shell terminates the container and its associated namespaces:
+
+```bash
+# runc list
+ID PID STATUS BUNDLE CREATE
+```
+
+6.Edit the config.json and change the default process that is started:
+
+File: /root/container/config.json
+
+   "process": {
+              "terminal": true false,
+              "user": {},
+              "args": [
+                      "sleep", "1d"
+               ],
+
