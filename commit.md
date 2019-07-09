@@ -1,4 +1,4 @@
-# Create image using docker commit
+# Create images using docker commit
 
 By the end of this exercise, you should be able to:
 
