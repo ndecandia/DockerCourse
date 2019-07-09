@@ -11,7 +11,7 @@ By the end of this exercise, you should be able to:
 1.  First try running a container as usual; the STDOUT and STDERR streams from whatever is PID 1 inside the container are directed to the terminal:
 
     ```bash
-    [centos@node-0 ~]$ docker container run centos:7 ping 127.0.0.1 -c 2
+    [centos@desotech ~]$ docker container run centos:7 ping 127.0.0.1 -c 2
 
     PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
     64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.021 ms
@@ -25,7 +25,7 @@ By the end of this exercise, you should be able to:
 2.  The same process can be run in the background with the `-d` flag:
 
     ```bash
-    [centos@node-0 ~]$ docker container run -d centos:7 ping 127.0.0.1
+    [centos@desotech ~]$ docker container run -d centos:7 ping 127.0.0.1
 
     d5ef517cc113f36738005295066b271ae604e9552ce4070caffbacdc3893ae04
     ```
@@ -35,7 +35,7 @@ By the end of this exercise, you should be able to:
 3.  Use this second container's ID to inspect the logs it generated:
 
     ```bash
-    [centos@node-0 ~]$ docker container logs <container ID>
+    [centos@desotech ~]$ docker container logs <container ID>
     ```
 
     These logs correspond to STDOUT and STDERR from the container's PID 1. Also note when using container IDs: you don't need to specify the entire ID. Just enough characters from the start of the ID to uniquely identify it, often just 2 or 3, is sufficient.
@@ -45,7 +45,7 @@ By the end of this exercise, you should be able to:
 1.  We can attach a terminal to a container's PID 1 output with the `attach` command; try it with the last container you made in the previous step:
 
     ```bash
-    [centos@node-0 ~]$ docker container attach <container ID>
+    [centos@desotech ~]$ docker container attach <container ID>
     ```
 
 2.  We can leave attached mode by then pressing `CTRL+C`. After doing so, list your running containers; you should see that the container you attached to has been killed, since the `CTRL+C` issued killed PID 1 in the container, and therefore the container itself.
@@ -53,7 +53,7 @@ By the end of this exercise, you should be able to:
 3.  Try running the same thing in detached interactive mode:
 
     ```bash
-    [centos@node-0 ~]$ docker container run -d -it centos:7 ping 127.0.0.1
+    [centos@desotech ~]$ docker container run -d -it centos:7 ping 127.0.0.1
     ```
 
 4.  Attach to this container like you did the first one, but this time detach with `CTRL+P CTRL+Q` (sequential, not simultaneous), and list your running containers. In this case, the container should still be happily running in the background after detaching from it.
@@ -63,7 +63,7 @@ By the end of this exercise, you should be able to:
 1.  We saw previously how to read the entire log of a container's PID 1; we can also use a couple of flags to control what logs are displayed. `--tail n` limits the display to the last n lines; try it with the container that should be running from the last step:
 
     ```bash
-    [centos@node-0 ~]$ docker container logs --tail 5 <container ID>
+    [centos@desotech ~]$ docker container logs --tail 5 <container ID>
     ```
 
     You should see the last 5 pings from this container.
@@ -71,7 +71,7 @@ By the end of this exercise, you should be able to:
 2.  We can also follow the logs as they are generated with `-f`:
 
     ```bash
-    [centos@node-0 ~]$ docker container logs -f <container ID>
+    [centos@desotech ~]$ docker container logs -f <container ID>
     ```
 
     The container's logs get piped in real time to the terminal (`CTRL+C` to break out of following mode - note this doesn't kill the process like when we attached to it, since now we're tailing the logs, not attaching to the process).
