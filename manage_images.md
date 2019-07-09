@@ -17,13 +17,13 @@ By the end of this exercise, you should be able to:
 1.  Download the `centos:7` image from Docker Hub:
 
     ```bash
-    [centos@node-0 ~]$ docker image pull centos:7
+    [centos@desotech ~]$ docker image pull centos:7
     ```
 
 2.  Make a new tag of this image:
 
     ```bash
-    [centos@node-0 ~]$ docker image tag centos:7 my-centos:dev
+    [centos@desotech ~]$ docker image tag centos:7 my-centos:dev
     ```
 
     Note no new image has been created; `my-centos:dev` is just a pointer pointing to the same image as `centos:7`.
@@ -31,7 +31,7 @@ By the end of this exercise, you should be able to:
 3.  List your images:
 
     ```bash
-    [centos@node-0 ~]$ docker image ls
+    [centos@desotech ~]$ docker image ls
     ```
     
     You should have `centos:7` and `my-centos:dev` both listed, but they ought to have the same hash under image ID, since they're actually the same image.
@@ -41,7 +41,7 @@ By the end of this exercise, you should be able to:
 1.  Push your image to Docker Hub:
 
     ```bash
-    [centos@node-0 ~]$ docker image push my-centos:dev
+    [centos@desotech ~]$ docker image push my-centos:dev
     ```
 
     You should get a `denied: requested access to the resource is denied` error.
@@ -51,8 +51,8 @@ By the end of this exercise, you should be able to:
 3.  Retag your image to be namespaced properly, and push again:
 
     ```bash
-    [centos@node-0 ~]$ docker image tag my-centos:dev <Docker ID>/my-centos:dev
-    [centos@node-0 ~]$ docker image push <Docker ID>/my-centos:dev
+    [centos@desotech ~]$ docker image tag my-centos:dev <Docker ID>/my-centos:dev
+    [centos@desotech ~]$ docker image push <Docker ID>/my-centos:dev
     ```
 
 4.  Search Docker Hub for your new `<Docker ID>/my-centos` repo, and confirm that you can see the `:dev` tag therein.
@@ -60,7 +60,7 @@ By the end of this exercise, you should be able to:
 5.  Next, write a Dockerfile that uses `<Docker ID>/my-centos:dev` as its base image, and installs any application you like on top of that. Build the image, and simultaneously tag it as `:1.0`:
 
     ```bash
-    [centos@node-0 ~]$ docker image build -t <Docker ID>/my-centos:1.0 .
+    [centos@desotech ~]$ docker image build -t <Docker ID>/my-centos:1.0 .
     ```
 
 6.  Push your `:1.0` tag to Docker Hub, and confirm you can see it in the appropriate repository.
@@ -68,7 +68,7 @@ By the end of this exercise, you should be able to:
 7.  Finally, list the images currently on your node with `docker image ls`. You should still have the version of your image that wasn't namespaced with your Docker Hub user name; delete this using `docker image rm`:
 
     ```bash
-    [centos@node-0 ~]$ docker image rm my-centos:dev
+    [centos@desotech ~]$ docker image rm my-centos:dev
     ```
     
     Only the tag gets deleted, not the actual image. The image layers are still referenced by another tag.
