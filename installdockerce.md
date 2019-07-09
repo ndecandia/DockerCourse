@@ -51,3 +51,5 @@ $ sudo yum install -y yum-utils \
   
   Now, your docker engine is ready. Note that with command ran at step 4, docker engine will start at each boot of operating     system.
   
+  In this exercise, we have installed docker on centos distribution. If you want to install docker on other OS, is recommended   to follow official guides offered by docker. Check https://docs.docker.com/.
+  
