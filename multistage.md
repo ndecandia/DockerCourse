@@ -3,7 +3,7 @@
 By the end of this exercise, you should be able to:
 
 - Write a Dockerfile that describes multiple images, which can copy files from one image to the next.
-- Enable BuildKit for faster build times
+
 
 ## Defining a multi-stage build
 
@@ -197,64 +197,6 @@ So far, every image we've built has been based on a pre-existing image, referenc
     [centos@desotech scratch]$ docker container rm -f sleeper
     ```
 
-## Optional: Enabling BuildKit
-
-In addition to the default builder, BuildKit can be enabled to take advantages of some optimizations of the build process.
-
-1.  Back in the `~/multi` directory, turn on BuildKit:
-
-    ```bash
-    [centos@desotech multi]$ export DOCKER_BUILDKIT=1
-    ```
-
-2.  Add an `AS` label to the final stage of your Dockerfile (this is not strictly necessary, but will make the output in the next step easier to understand):
-
-    ```Dockerfile
-    ...
-
-    FROM alpine:3.5 AS prod
-    RUN apk update
-    COPY --from=build /app/bin/hello /app/hello
-    CMD /app/hello
-    ```
-
-3.  Re-build `my-app-small`, without the cache:
-
-    ```bash
-    [centos@desotech multi]$ docker image build --no-cache -t my-app-small-bk .
-
-    [+] Building 15.5s (14/14) FINISHED                                       
-     => [internal] load Dockerfile
-     => => transferring dockerfile: 97B
-     => [internal] load .dockerignore
-     => => transferring context: 2B
-     => [internal] load metadata for docker.io/library/alpine:3.5
-     => CACHED [prod 1/3] FROM docker.io/library/alpine:3.5
-     => [internal] load build context
-     => => transferring context: 87B
-     => CACHED [internal] helper image for file operations
-     => [build 2/6] RUN apk update &&     apk add --update alpine-sdk
-     => [prod 2/3] RUN apk update
-     => [build 3/6] RUN mkdir /app
-     => [build 4/6] COPY hello.c /app
-     => [build 5/6] RUN mkdir bin
-     => [build 6/6] RUN gcc -Wall hello.c -o bin/hello
-     => [prod 3/3] COPY --from=build /app/bin/hello /app/hello
-     => exporting to image
-     => => exporting layers
-     => => writing image sha256:22de288...
-     => => naming to docker.io/library/my-app-small-bk 
-    ```
-    
-    Notice the lines marked like `[prod 2/3]` and `[build 4/6]`: `prod` and `build` in this context are the `AS` labels you applied to the `FROM` lines in each stage of your build in the Dockerfile; from the above output, you can see that the build stages were built in parallel. Every step of the final image was completed while the build environment image was being created; the `prod` environment image creation was only blocked at the `COPY` instruction since it required a file from the completed `build` image.
-
-4.  Comment out the `COPY` instruction in the `prod` image definition in your Dockerfile, and rebuild; the `build` image is skipped. BuildKit recognized that the `build` stage was not necessary for the image being built, and skipped it.
-
-5.  Turn off BuildKit:
-
-    ```bash
-    [centos@desotech multi]$ export DOCKER_BUILDKIT=0
-    ```
 
 ## Conclusion
 
