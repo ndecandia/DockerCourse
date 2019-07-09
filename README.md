@@ -2,7 +2,7 @@
 
 #### Exercises
 
- - [Running and Inspecting Containers](run_inspect_container.md) 
+ - [Running and Inspecting Containers](/run_inspect_container.md) 
  - [Interactive Containers](linux/exercises/interactive-containers.md)
  - [Detached Containers and Logging](linux/exercises/detached-containers-and-logging.md)
  - [Starting, Stopping, Inspecting and Deleting Containers](linux/exercises/starting-stopping-inspecting-and-deleting-containers.md)
