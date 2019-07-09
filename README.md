@@ -5,7 +5,7 @@
  - [Using RunC to start a Container](/runc.md) 
  - [Installing Docker Engine](/installdockerce.md) 
  - [Run & Inspect Containers](/run_inspect_container.md) 
- - [Interactive Containers](linux/exercises/interactive-containers.md)
+ - [Administer Containers](administer_container.md)
  - [Detached Containers and Logging](linux/exercises/detached-containers-and-logging.md)
  - [Starting, Stopping, Inspecting and Deleting Containers](linux/exercises/starting-stopping-inspecting-and-deleting-containers.md)
  - [Interactive Image Creation](linux/exercises/interactive-image-creation.md)
