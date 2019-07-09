@@ -6,7 +6,7 @@
  - [Installing Docker Engine](/installdockerce.md) 
  - [Run & Inspect Containers](/run_inspect_container.md) 
  - [Administer Containers](administer_container.md)
- - [Detached Containers and Logging](linux/exercises/detached-containers-and-logging.md)
+ - [Administer Containers (2)](administer_container2.md)
  - [Starting, Stopping, Inspecting and Deleting Containers](linux/exercises/starting-stopping-inspecting-and-deleting-containers.md)
  - [Interactive Image Creation](linux/exercises/interactive-image-creation.md)
  - [Creating Images with Dockerfiles (1/2)](linux/exercises/creating-images-with-dockerfiles-part-1.md)
