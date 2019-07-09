@@ -22,7 +22,7 @@ $ sudo yum install -y yum-utils \
   ```
   
   
-  3. Install the latest version of Docker CE and containerd, or go to the next step to install a specific version:
+  3. Install the latest version of Docker CE and containerd:
   
   ```bash
   $ sudo yum install docker-ce docker-ce-cli containerd.io
@@ -48,4 +48,6 @@ $ sudo yum install -y yum-utils \
   $ sudo docker version
   $ sudo docker info
   ```
+  
+  Now, your docker engine is ready. Note that with command ran at step 4, docker engine will start at each boot of operating     system.
   
