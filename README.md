@@ -13,4 +13,5 @@
  - [Create Images using Dockerfiles (1/2)](dockerfile.md)
  - [Create Images using Dockerfiles (2/2)](dockerfile2.md)
  - [Create Images using Dockerfiles (3/3) | Multi-Stage](/multistage.md)
+ - [Docker Registry](/registry.md)
 
