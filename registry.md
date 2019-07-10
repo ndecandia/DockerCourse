@@ -10,7 +10,7 @@ By the end of this exercise, you should be able to:
 
 ```bash
 $ docker container run -dp 5000:5000 --name reg registry:2.6
-Unable to find image registry:2.6 locally
+Unable to find image 'registry:2.6' locally
 2.5: Pulling from registry
 3690ec4760f9: Pull complete
 930045f1e8fb: Pull complete
@@ -114,7 +114,7 @@ threshold: 3
 6. Modify the config so the registry runs on port 80:
 
 ```bash
-$ sed -i s/5000/80/ config.yml
+$ sed -i 's/5000/80/' config.yml
 ```
 
 7. Run a new registry with the modified config:
@@ -149,7 +149,7 @@ latest: digest: sha256:9e19eb0c215b760dc7f268402ffe83cb0f063bbcbb181bc25d2d75a95
 it:
 
 ```bash
-$ docker container inspect -f {{json .Mounts }} reg | tr , \n
+$ docker container inspect -f '{{json .Mounts }}' reg | tr , '\n'
 [{"Source":"/home/guru/reg_config/config.yml"
 "Destination":"/config.yml"
 "Mode":""
@@ -185,12 +185,3 @@ $ curl localhost/v2/busybox/tags/list
 {"name":"busybox","tags":["latest","v2"]}
 ```
 
-11. Backup the registry contents then remove the container and its volume:
-
-```bash
-$ docker container exec reg tar -cC /var/lib/registry -f - . > guru/registry.tar
-$ ls -l guru/registry.tar
--rw-rw-r--. 1 guru guru 730112 Nov 8 14:40 registry.tar
-$ docker container rm -fv reg
-reg
-```
